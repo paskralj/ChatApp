@@ -11,32 +11,37 @@ import java.security.PublicKey;
 
 public class CryptoUtils {
 
-    private static PrivateKey privateKey;
-    private static PublicKey publicKey;
+    private final PrivateKey privateKey;
+    private final PublicKey publicKey;
 
-    public static void setPrivateKey(PrivateKey privateKey) {
-        CryptoUtils.privateKey = privateKey;
+    public CryptoUtils(PrivateKey privateKey, PublicKey publicKey) {
+        this.privateKey = privateKey;
+        this.publicKey = publicKey;
     }
 
-    public static void setPublicKey(PublicKey publicKey) {
-        CryptoUtils.publicKey = publicKey;
-    }
-
-    public static String decryptMessage(byte[] encryptedMessage) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
+    public String decryptMessage(byte[] encryptedMessage) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
         if (privateKey == null) {
             throw new IllegalStateException("Private key nije inicijaliziran.");
         }
         Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        cipher.init(Cipher.DECRYPT_MODE, this.privateKey);
         return new String(cipher.doFinal(encryptedMessage));
     }
 
-    public static byte[] encryptMessage(String message) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    public byte[] encryptMessage(String message) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         if (publicKey == null) {
             throw new IllegalStateException("Public key nije inicijaliziran.");
         }
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         return cipher.doFinal(message.getBytes());
+    }
+
+    public PrivateKey getPrivateKey() {
+        return privateKey;
+    }
+
+    public PublicKey getPublicKey() {
+        return publicKey;
     }
 }

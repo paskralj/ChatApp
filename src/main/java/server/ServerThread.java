@@ -7,30 +7,31 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ServerThread extends Thread {
 
     private final Socket socket;
-    private final PublicKey publicKey;
-    private final PrivateKey privateKey;
+    private final CryptoUtils cryptoUtils;
     private volatile boolean running = true;
 
-    public ServerThread(Socket socket, PublicKey publicKey, PrivateKey privateKey) {
+    public ServerThread(Socket socket, CryptoUtils cryptoUtils) {
         this.socket = socket;
-        this.publicKey = publicKey;
-        this.privateKey = privateKey;
+        this.cryptoUtils = cryptoUtils;
     }
 
     @Override
     public void run() {
+        PublicKey publicKey = cryptoUtils.getPublicKey();
         try {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             out.flush();
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-            out.write(publicKey.getEncoded());
-            System.out.println("Server je poslao javni kljuc.");
+            out.writeObject(publicKey.getEncoded());
+            out.flush();
+            System.out.println("Server je poslao javni kljuc." + Arrays.toString(publicKey.toString().getBytes()));
 
             Thread outgoingThread = new Thread(() -> handleOutgoingRequests(out));
             Thread incomingThread = new Thread(() -> handleIncomingRequests(in));
@@ -55,14 +56,21 @@ public class ServerThread extends Thread {
                     System.out.println("Socket je zatvoren. Prekidam primanje poruka.");
                     break;
                 }
-                byte[] encryptedMessage = (byte[]) in.readObject();
-                String decryptedMessage = CryptoUtils.decryptMessage(encryptedMessage);
-                System.out.println("Primljena poruka: " + decryptedMessage);
+                try {
+                    byte[] encryptedMessage = (byte[]) in.readObject(); // Blokira dok poruka ne stigne
+                    String decryptedMessage = cryptoUtils.decryptMessage(encryptedMessage);
+                    System.out.println("Primljena poruka: " + decryptedMessage);
 
-                if (decryptedMessage.equalsIgnoreCase("quit")) {
-                    System.out.println("Primljena naredba za gašenje.");
-                    running = false; // Postavlja se signal za prekid
+                    if (decryptedMessage.equalsIgnoreCase("quit")) {
+                        System.out.println("Primljena naredba za gašenje.");
+                        running = false; // Signal za prekid
+                    }
+                } catch (Exception e) {
+                    System.out.println("Greška prilikom čitanja poruke.");
+                    e.printStackTrace();
+                    running = false;
                 }
+
             }
         } catch (Exception e) {
             System.out.println("Primanje poruka prekinuto!");
@@ -78,7 +86,7 @@ public class ServerThread extends Thread {
                 String message = scanner.nextLine();
                 if (!running) break; // Dodatna provjera nakon unosa
 
-                byte[] encryptedMessage = CryptoUtils.encryptMessage(message);
+                byte[] encryptedMessage = cryptoUtils.encryptMessage(message);
                 out.writeObject(encryptedMessage);
                 out.flush();
             }

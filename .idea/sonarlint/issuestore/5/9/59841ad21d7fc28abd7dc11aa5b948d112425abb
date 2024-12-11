@@ -1,16 +1,0 @@
-
-
-java:S2095"JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(«ŠûÖ8¶ÚÇ—»2J$4beb938a-4537-4f9f-af3f-c8b4d718971e
-
-java:S1854">Remove this useless assignment to local variable "privateKey".(ù‘…´8ºÚÇ—»2J$67e8e9e3-ee73-4bb3-bff5-95a9c8daff48
-r	java:S106"+Replace this use of System.out by a logger.(øÓ±€ùÿÿÿÿ8¾ÚÇ—»2J$13fc6b2f-eac1-4867-8a3d-7baac0c94d68
-r
-java:S1481"/Remove this unused "privateKey" local variable.(ù‘…´8ÀÚÇ—»2J$693ad08e-2fa5-461d-8988-7b0c946de3d4
-‡
-java:S21471"DCombine this catch with the one at line 47, which has the same body.(”ı¾8ÄÚÇ—»2J$f39d8b5c-37a7-4f32-b06d-5896942d3512
-m	java:S106"+Replace this use of System.out by a logger.(øıÃÜ8ÅÚÇ—»2J$93c48c00-ca6e-45ea-8b5c-9bfb03e9b1bd
-d
-java:S5542""Use a secure padding scheme.(»¦µªúÿÿÿÿ8ÇÚÇ—»2J$9186c14e-f541-4a7e-b06a-87a2f2e5eca1
-m	java:S106%"+Replace this use of System.out by a logger.(ÖŞİŸ8ÉÚÇ—»2J$026c09c1-1da5-4c20-a7d2-94d158c1f98a
-r	java:S106'"+Replace this use of System.out by a logger.(Àƒ²Àùÿÿÿÿ8ÉÚÇ—»2J$35fecfe2-d098-45ef-baea-175919d2f535
-r	java:S106)"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ÊÚÇ—»2J$4b2c290f-d10c-41ac-89d0-62ffe29b2286

@@ -1,12 +1,12 @@
 
 }
-java:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8¼†æš»2J$141569fa-97c7-4e3b-b903-fe6626ed7bd4
-
-java:S2095 "JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(«ŠûÖ8ìÜîš»2J$fb0628eb-517e-48b1-b994-882110f5a4f6
-j
-java:S2189#""Add an end condition to this loop.(˜ïˆÿÿÿÿÿ8íÜîš»2J$3fa7bd0e-5893-43d8-82db-e15750e05ae0
-l	java:S106"+Replace this use of System.err by a logger.(î·Ç8Í†æš»2J$af823103-2fa5-4ebe-8318-94d8ae0488f9
-l	java:S106!"+Replace this use of System.out by a logger.(°åÏJ8…µü—»2J$69ff540d-1238-4ee7-97a7-c5436b5c5da3
-r	java:S106%"+Replace this use of System.out by a logger.(ä›—Âúÿÿÿÿ8óÜîš»2J$7ecfe77d-0b2e-4948-bc78-74ad57af091c
+java:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8¼†æš»2J$c2ac9a12-dad3-4e83-a81f-23cc04301413
+g
+java:S2095"JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(«ŠûÖ8¡›ğ¬»2
+D
+java:S2189"""Add an end condition to this loop.(˜ïˆÿÿÿÿÿ8¢›ğ¬»2
+l	java:S106"+Replace this use of System.err by a logger.(î·Ç8Í†æš»2J$bda46579-d4aa-4429-b998-5eb982233474
+l	java:S106 "+Replace this use of System.out by a logger.(°åÏJ8àùª»2J$8a6c13b8-24ae-484f-af3d-5c3037d66154
+r	java:S106$"+Replace this use of System.out by a logger.(ä›—Âúÿÿÿÿ8éÌƒª»2J$8e351a7d-c842-48b2-b06c-131cbb849428
 ƒ
-java:S2438&"@Replace this ServerThread instance with an instance of Runnable.(Ä·Ó©8õÜîš»2J$b2595d18-a7e7-4b3a-9116-7b2faeede738
+java:S2438%"@Replace this ServerThread instance with an instance of Runnable.(¡Äåö8õÜîš»2J$6d858a69-09fc-4a57-a25e-0389d4b424f4

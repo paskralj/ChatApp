@@ -3,10 +3,6 @@ S
 #src/main/java/org/example/Main.java,0\b\0ba1b9c7a4878802f938e331cc2d8a042087ec6b
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-S
-#src/main/java/server/ServerTCP.java,5\9\59841ad21d7fc28abd7dc11aa5b948d112425abb
-T
-$src/main/java/klijent/ClientTCP.java,6\0\6091375abe6d9a1617c4bb2b5de996c8f7d2b3f2
 Q
 !src/main/java/klijent/Client.java,5\7\578624fff21be1948054136661ffa6d6890814f1
 P

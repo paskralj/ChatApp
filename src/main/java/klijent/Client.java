@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
@@ -17,25 +15,41 @@ import java.util.Scanner;
 public class Client {
 
     private static volatile boolean running = true;
+    private static Socket socket;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
 
         try {
-            Socket socket = new Socket("localhost", 12345);
+            socket = new Socket("localhost", 12345);
             System.out.println("Povezan na server.");
 
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            // generiranje privatnog kljuca, a za public key cemo uzesti serverov
+            KeyPairGenerator keyGen;
+            try {
+                keyGen = KeyPairGenerator.getInstance("RSA");
+            } catch (Exception e) {
+                System.err.println("RSA algorithm not available. Ensure your environment supports RSA.");
+                return;
+            }
+            keyGen.initialize(2048);
+            KeyPair keyPair = keyGen.generateKeyPair();
+            PrivateKey privateClientKey = keyPair.getPrivate();
+            PublicKey publicClientKey = keyPair.getPublic();
+
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
             byte[] publicEncodedKey = (byte[]) in.readObject();
             System.out.println("Primljen javni ključ od servera: " + Arrays.toString(publicEncodedKey));
 
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PublicKey serverPublicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicEncodedKey));
-            System.out.println("Primljen i rekonstruiran javni ključ servera.");
+            System.out.println("Primljen i rekonstruiran javni ključ servera." + Arrays.toString(serverPublicKey.toString().getBytes()));
 
-            new Thread(() -> handleIncomingMessages(in)).start();
-            new Thread(() -> handleOutgoingMessages(out, serverPublicKey)).start();
+            CryptoUtils cryptoUtils = new CryptoUtils(privateClientKey, serverPublicKey);
+
+            new Thread(() -> handleIncomingMessages(in, cryptoUtils)).start();
+            new Thread(() -> handleOutgoingMessages(out, cryptoUtils)).start();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,14 +58,22 @@ public class Client {
 
     }
 
-    private static void handleIncomingMessages(ObjectInputStream in) {
+    private static void handleIncomingMessages(ObjectInputStream in, CryptoUtils cryptoUtils) {
         try {
             while (running) {
-                if (in.available() > 0) {
-                    byte[] encryptedMessage = (byte[]) in.readObject();
-                    String decryptedMessage = CryptoUtils.decryptMessage(encryptedMessage);
-                    System.out.println("Primljena poruka: " + decryptedMessage);
-                } else System.out.println("Nema podataka za primiti.");
+                if (socket.isClosed()) {
+                    System.out.println("Socket zatvoren. Prekidam čitanje.");
+                    break;
+                }
+                try {
+                    byte[] encryptedMessage = (byte[]) in.readObject();// Blokira dok ne stigne poruka
+                    String decryptedMessage = cryptoUtils.decryptMessage(encryptedMessage);
+                    System.out.println("Primljena poruka od servera: " + decryptedMessage);
+                } catch (Exception e) {
+                    System.out.println("Greška prilikom primanja poruke.");
+                    e.printStackTrace();
+                    running = false;
+                }
             }
         } catch (Exception e) {
             System.out.println("Primanje poruka prekinuto.");
@@ -59,15 +81,17 @@ public class Client {
         }
     }
 
-    private static void handleOutgoingMessages(ObjectOutputStream out, PublicKey serverPublicKey) {
+    private static void handleOutgoingMessages(ObjectOutputStream out, CryptoUtils cryptoUtils) {
         try {
             Scanner scanner = new Scanner(System.in);
             while (running) {
                 System.out.print("Unesite poruku za server: ");
                 String message = scanner.nextLine();
                 if (!running) break; // Dodatna provjera nakon unosa
-                byte[] encryptedMessage = CryptoUtils.encryptMessage(message);
+
+                byte[] encryptedMessage = cryptoUtils.encryptMessage(message);
                 out.writeObject(encryptedMessage);
+                out.flush();
             }
         } catch (Exception e) {
             System.out.println("Slanje poruka prekinuto.");

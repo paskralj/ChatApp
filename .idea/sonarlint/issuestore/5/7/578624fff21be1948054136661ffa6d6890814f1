@@ -1,13 +1,19 @@
 
-Œ
-java:S2095"DUse try-with-resources or close this "Socket" in a "finally" clause.(á¯Â¤øÿÿÿÿ8¤ù›»2J$8fda271b-0347-4f11-b349-633cbbd4cdbe
-r	java:S106"+Replace this use of System.out by a logger.(÷ÔÖİıÿÿÿÿ8–¤ù›»2J$6913c8d0-244a-44ba-9fd5-a58b4391aa07
-m	java:S106"+Replace this use of System.out by a logger.(İ»³Æ8™¤ù›»2J$73212e7b-4b9a-4a60-a1a6-54528bbe71e7
-r	java:S106#"+Replace this use of System.out by a logger.(‘åëÚüÿÿÿÿ8™¤ù›»2J$2df6f275-dff9-4a6f-8f4e-0fb2f5ba8f2f
-r	java:S1065"+Replace this use of System.out by a logger.(İíüÿÿÿÿ8¤ù›»2J$991b745a-1fa6-41e5-bc8b-f9a24f982c42
-r	java:S1066"+Replace this use of System.out by a logger.(Ë§†ûıÿÿÿÿ8¤ù›»2J$bcbc1271-0305-462b-8cd5-504fb84808c2
-m	java:S1069"+Replace this use of System.out by a logger.(ø‰Á˜8¡¤ù›»2J$c1659d28-d87d-4feb-9970-0f7854de68b6
-~
-java:S1172>"6Remove this unused method parameter "serverPublicKey".(æï½üÿÿÿÿ8Ÿ¤ù›»2J$5030fcba-9774-4681-8ada-d3137b23aa61
-r	java:S106B"+Replace this use of System.out by a logger.(°¡ä¹ûÿÿÿÿ8¢¤ù›»2J$400d3a61-d11c-4bf7-b9bc-231fcefa73b6
-L	java:S106I"+Replace this use of System.out by a logger.(õíéùÿÿÿÿ8éîù›»2
+}
+java:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ìÿä«»2J$e70f4e0f-44e3-4091-8431-ba683b7c1f5c
+}
+java:S1141D"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8íÿä«»2J$6a7b14db-8ae5-4051-9b83-def2e300255e
+`
+java:S1854%"CRemove this useless assignment to local variable "publicClientKey".(Ü„Ö™8œçİ¬»2
+r	java:S106"+Replace this use of System.out by a logger.(÷ÔÖİıÿÿÿÿ8Ÿ€å«»2J$d55ba344-de19-4c7c-b4e3-973d3afc5c7e
+l	java:S106"+Replace this use of System.err by a logger.(î·Ç8 €å«»2J$2d1401e8-6c88-437a-95bf-bd5b4053c216
+Q
+java:S1481%"4Remove this unused "publicClientKey" local variable.(Ü„Ö™8¡çİ¬»2
+m	java:S106+"+Replace this use of System.out by a logger.(İ»³Æ8¤€å«»2J$165e657b-a3f0-47d3-80e9-1d8b96ea2b74
+m	java:S106/"+Replace this use of System.out by a logger.(™€´Å8¥€å«»2J$2206f471-873a-44e5-90ad-cc22a0911e7c
+m	java:S106A"+Replace this use of System.out by a logger.(„èÏê8¨€å«»2J$ea977740-e0bb-41e0-b046-1e1ba55ecf93
+m	java:S106G"+Replace this use of System.out by a logger.(¼ŒÈ8©€å«»2J$3d58dd28-02a6-4b7e-b87a-01e1652bd413
+m	java:S106I"+Replace this use of System.out by a logger.(ïÌÛ8ª€å«»2J$7f257f7a-50c6-49d1-aeb6-b056dbcb9523
+m	java:S106O"+Replace this use of System.out by a logger.(ø‰Á˜8­€å«»2J$0d142406-345f-4f97-b151-bdc3429c552d
+r	java:S106X"+Replace this use of System.out by a logger.(°¡ä¹ûÿÿÿÿ8®€å«»2J$53126778-a46b-4cd9-8616-b2f13fab5d0d
+r	java:S106a"+Replace this use of System.out by a logger.(õíéùÿÿÿÿ8óÊï«»2J$7a783f28-a6bc-4c1c-b48a-fe537191d906
