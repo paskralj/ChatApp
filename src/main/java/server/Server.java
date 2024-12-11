@@ -2,12 +2,12 @@ package server;
 
 import encryptdecrypt.CryptoUtils;
 
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Arrays;
 
 public class Server {
 
@@ -23,9 +23,9 @@ public class Server {
             }
             keyGen.initialize(2048);
             KeyPair keyPair = keyGen.generateKeyPair();
-            PublicKey publicKey = keyPair.getPublic();
-            PrivateKey privateKey = keyPair.getPrivate();
-            CryptoUtils cryptoUtils = new CryptoUtils(privateKey, publicKey); // ode mi treba klijentov public key
+            PublicKey publicServerKey = keyPair.getPublic();
+            PrivateKey privateServerKey = keyPair.getPrivate();
+
 
             // server socket port 12345
             ServerSocket serverSocket = new ServerSocket(12345);
@@ -34,7 +34,17 @@ public class Server {
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("Klijent povezan.");
-                new Thread(new ServerThread(socket, cryptoUtils)).start();
+
+                // primanje public klijent key-a
+                ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                byte[] clientPublicKeyBytes = (byte[]) in.readObject(); // prima javni ključ klijenta
+                KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+                PublicKey clientPublicKey = keyFactory.generatePublic(new X509EncodedKeySpec(clientPublicKeyBytes));
+                System.out.println("Primljen javni ključ klijenta: " + Arrays.toString(clientPublicKey.toString().getBytes()));
+
+                CryptoUtils cryptoUtils = new CryptoUtils(privateServerKey, clientPublicKey);
+                // ode mi treba klijentov public key
+                new Thread(new ServerThread(socket, cryptoUtils, in, publicServerKey)).start();
             }
         } catch (Exception e) {
             e.printStackTrace();

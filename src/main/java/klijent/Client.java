@@ -37,13 +37,19 @@ public class Client {
             PublicKey publicClientKey = keyPair.getPublic();
 
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            // saljem public key prema serveru
+            out.writeObject(publicClientKey.getEncoded());
+            out.flush();
+            System.out.println("Klijent je poslao javni kljuc." + Arrays.toString(publicClientKey.toString().getBytes()));
+
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-            byte[] publicEncodedKey = (byte[]) in.readObject();
-            System.out.println("Primljen javni ključ od servera: " + Arrays.toString(publicEncodedKey));
+            // primam public key od servera
+            byte[] publicEncodedServerKey = (byte[]) in.readObject();
+            System.out.println("Primljen javni ključ od servera: " + Arrays.toString(publicEncodedServerKey));
 
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            PublicKey serverPublicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicEncodedKey));
+            PublicKey serverPublicKey = keyFactory.generatePublic(new X509EncodedKeySpec(publicEncodedServerKey));
             System.out.println("Primljen i rekonstruiran javni ključ servera." + Arrays.toString(serverPublicKey.toString().getBytes()));
 
             CryptoUtils cryptoUtils = new CryptoUtils(privateClientKey, serverPublicKey);

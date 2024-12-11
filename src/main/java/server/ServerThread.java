@@ -5,7 +5,6 @@ import encryptdecrypt.CryptoUtils;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -15,10 +14,14 @@ public class ServerThread extends Thread {
     private final Socket socket;
     private final CryptoUtils cryptoUtils;
     private volatile boolean running = true;
+    private ObjectInputStream in;
+    private PublicKey publicServerKey;
 
-    public ServerThread(Socket socket, CryptoUtils cryptoUtils) {
+    public ServerThread(Socket socket, CryptoUtils cryptoUtils, ObjectInputStream in, PublicKey publicServerKey) {
         this.socket = socket;
         this.cryptoUtils = cryptoUtils;
+        this.in = in;
+        this.publicServerKey = publicServerKey;
     }
 
     @Override
@@ -26,10 +29,7 @@ public class ServerThread extends Thread {
         PublicKey publicKey = cryptoUtils.getPublicKey();
         try {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-            out.flush();
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-
-            out.writeObject(publicKey.getEncoded());
+            out.writeObject(publicServerKey.getEncoded());
             out.flush();
             System.out.println("Server je poslao javni kljuc." + Arrays.toString(publicKey.toString().getBytes()));
 
