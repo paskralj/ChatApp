@@ -1,0 +1,13 @@
+
+
+java:S2095"DUse try-with-resources or close this "Socket" in a "finally" clause.(α―Β¤ψÿÿÿÿ8¤ω›»2J$8fda271b-0347-4f11-b349-633cbbd4cdbe
+r	java:S106"+Replace this use of System.out by a logger.(χΤΦέύÿÿÿÿ8–¤ω›»2J$6913c8d0-244a-44ba-9fd5-a58b4391aa07
+m	java:S106"+Replace this use of System.out by a logger.(έ»³Ζ8™¤ω›»2J$73212e7b-4b9a-4a60-a1a6-54528bbe71e7
+r	java:S106#"+Replace this use of System.out by a logger.(‘ελΪόÿÿÿÿ8™¤ω›»2J$2df6f275-dff9-4a6f-8f4e-0fb2f5ba8f2f
+r	java:S1065"+Replace this use of System.out by a logger.(ένόÿÿÿÿ8¤ω›»2J$991b745a-1fa6-41e5-bc8b-f9a24f982c42
+r	java:S1066"+Replace this use of System.out by a logger.(Λ§†ϋύÿÿÿÿ8¤ω›»2J$bcbc1271-0305-462b-8cd5-504fb84808c2
+m	java:S1069"+Replace this use of System.out by a logger.(ψ‰Α8΅¤ω›»2J$c1659d28-d87d-4feb-9970-0f7854de68b6
+~
+java:S1172>"6Remove this unused method parameter "serverPublicKey".(ζο½όÿÿÿÿ8¤ω›»2J$5030fcba-9774-4681-8ada-d3137b23aa61
+r	java:S106B"+Replace this use of System.out by a logger.(°΅δΉϋÿÿÿÿ8Ά¤ω›»2J$400d3a61-d11c-4bf7-b9bc-231fcefa73b6
+L	java:S106I"+Replace this use of System.out by a logger.(υνιωÿÿÿÿ8ιξω›»2

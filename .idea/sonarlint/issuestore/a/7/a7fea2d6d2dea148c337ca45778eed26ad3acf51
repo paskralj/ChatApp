@@ -1,0 +1,13 @@
+
+΅
+java:S2142."^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ύΎ8ΙσΨ»2J$5b0a0a19-2006-43c1-8479-784f24909ebb
+m	java:S106!"+Replace this use of System.out by a logger.(–ΰα8ÿΛΕ»2J$2304bd9f-03be-4260-8813-bb95d9836f86
+m	java:S106,"+Replace this use of System.out by a logger.(«›¶Ο8ΦνΪ»2J$73ff8db9-c489-4d55-ae9c-4275e78308b7
+r	java:S1067"+Replace this use of System.out by a logger.(Κ­ζΞωÿÿÿÿ8θμα»2J$414cc567-5a98-41c4-8f98-c4946c36ec8c
+r	java:S106<"+Replace this use of System.out by a logger.(ένόÿÿÿÿ8ηθ½»2J$bb5a5c14-acda-42fa-9b3a-50d39dfd5573
+m	java:S106?"+Replace this use of System.out by a logger.(ΖΦ¦ι8Ο”“›»2J$f45e1d39-d5ba-41f8-8bf2-0613a06ad1ad
+r	java:S106D"+Replace this use of System.out by a logger.(γ–©όÿÿÿÿ8“ά“›»2J$272b0537-b971-453c-803a-402df27f3ba4
+r	java:S106M"+Replace this use of System.out by a logger.(ΰ£Σ‚όÿÿÿÿ8”ά“›»2J$d735133b-2ce0-47cc-96fc-2d07cb3eaf78
+r	java:S106V"+Replace this use of System.out by a logger.(υνιωÿÿÿÿ8γη›»2J$92d4e840-16a1-4553-bd98-be8ab41cfa2c
+v
+java:S1068".Remove this unused "privateKey" private field.(ξ©―¶ύÿÿÿÿ8µΔΎ»2J$62a0d4cf-c3e1-4920-bc25-33ef18f4af66
